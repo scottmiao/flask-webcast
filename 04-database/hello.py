@@ -1,10 +1,15 @@
-import os
+# import os
 from flask import Flask, render_template, request
 from flask.ext.pymongo import PyMongo
 
+MONGO_URI = 'mongodb://miao:pwd@linus.mongohq.com:10017/demo'
+
 app = Flask(__name__)
-app.config['MONGO_URI'] = os.environ['MONGO_URI']
+app.config.from_object(__name__)
+# app.config['MONGO_URI'] = os.environ['MONGO_URI']
+
 mongo = PyMongo(app)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -20,4 +25,3 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
